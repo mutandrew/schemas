@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/mutandrew/schemas/refs/heads/main/kbdf?token=GHSAT0AAAAAADPWS2NACFSKHKGMGCH6JXWQ2I7PX7Q",
+  "$id": "https://raw.githubusercontent.com/mutandrew/schemas/refs/heads/main/kbdf-receipt-v1.json",
   "title": "King's Bench Digital Filing Receipt",
   "type": "object",
   "additionalProperties": false,
