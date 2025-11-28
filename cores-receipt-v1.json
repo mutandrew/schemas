@@ -7,12 +7,11 @@
   "properties": {
     "source_kind": {
       "type": "string",
-      "description": "What kind of source this JSON was extracted from.",
       "enum": ["cores_output_pdf"]
     },
     "transaction_type_raw": {
       "type": "string",
-      "description": "The exact transaction type or heading text as it appears on the CORES document."
+      "description": "Exact transaction type or heading text as it appears on the CORES document."
     },
     "product_code": {
       "type": "string",
@@ -30,6 +29,7 @@
         "bca_search_corp_current_other",
         "bca_search_corp_historical_ab_and_extraprov",
         "bca_search_corp_historical_other",
+
         "bca_reg_amalgamate_alberta_corp",
         "bca_reg_change_name_alberta_corp",
         "bca_reg_change_name_extraprov_corp",
@@ -43,19 +43,23 @@
         "bca_reg_register_extraprov_corp",
         "bca_reg_register_extraprov_nonprofit_with_exemption",
         "bca_reg_reinstate_extraprov_corp",
+
         "pa_search_certified_info",
         "pa_search_certified_microfilm_attachment",
         "pa_search_certified_transaction",
         "pa_search_copy_microfilm_attachment",
         "pa_search_current_trade_name_or_partnership",
         "pa_search_historical_trade_name_or_partnership",
+
         "pa_reg_amend_limited_partnership",
         "pa_reg_amend_partnership",
         "pa_reg_register_limited_liability_partnership",
         "pa_reg_register_limited_partnership",
         "pa_reg_register_partnership",
         "pa_reg_register_trade_name",
+
         "bca_search_status_inquiry",
+
         "bca_reg_change_agent_for_service",
         "bca_reg_add_change_receiver",
         "bca_reg_add_update_record_keeper_after_dissolution",
@@ -82,7 +86,9 @@
         "bca_reg_revoke_cancellation_extraprov_corp",
         "bca_reg_revoke_intent_to_dissolve_alberta_corp",
         "bca_reg_service_provider_correct_corporation",
+
         "pa_search_status_inquiry",
+
         "pa_reg_amend_llp",
         "pa_reg_cancel_llp",
         "pa_reg_dissolve_limited_partnership",
@@ -90,52 +96,40 @@
         "pa_reg_file_llp_annual_report",
         "pa_reg_service_provider_correct_trade_name_or_partnership",
         "pa_reg_update_declarant_or_partner",
+
         "unknown"
       ]
     },
     "service_request_number": {
       "type": ["string", "null"],
-      "description": "Service Request Number (SRN) from the CORES document, if present.",
-      "pattern": "^[0-9]+$"
+      "pattern": "^[0-9]+$",
+      "description": "Service Request Number (SRN) found on the document."
     },
     "customer_reference_number": {
-      "type": ["string", "null"],
-      "description": "Customer reference number from the CORES document, if shown."
+      "type": ["string", "null"]
     },
     "corporate_access_number": {
-      "type": ["string", "null"],
-      "description": "Corporate Access Number (CAN) if present on the document."
+      "type": ["string", "null"]
     },
     "legal_entity_name": {
-      "type": ["string", "null"],
-      "description": "Full legal entity name (corporation, non-profit, trade name, partnership) from the document."
+      "type": ["string", "null"]
     },
     "act": {
       "type": ["string", "null"],
-      "description": "Which statute applies.",
       "enum": ["business_corporations_act", "partnership_act", "unknown", null]
     },
     "event_date": {
       "type": ["string", "null"],
-      "description": "The main date associated with the transaction, in ISO format YYYY-MM-DD.",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     },
     "event_time": {
-      "type": ["string", "null"],
-      "description": "Time of search or filing, if explicitly present (24-hour or 12-hour format as text)."
-    },
-    "government_fee": {
-      "type": ["number", "null"],
-      "description": "Government fee for this product according to the product catalogue, if known.",
-      "minimum": 0
+      "type": ["string", "null"]
     },
     "raw_header_text": {
-      "type": ["string", "null"],
-      "description": "The header / title block text from the top of the first page, as a sanity check."
+      "type": ["string", "null"]
     },
     "notes": {
-      "type": ["string", "null"],
-      "description": "Any extra comments or parsing assumptions."
+      "type": ["string", "null"]
     }
   },
   "required": [
