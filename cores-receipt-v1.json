@@ -100,10 +100,10 @@
         "unknown"
       ]
     },
+
     "service_request_number": {
       "type": ["string", "null"],
-      "pattern": "^[0-9]+$",
-      "description": "Service Request Number (SRN) found on the document."
+      "pattern": "^[0-9]+$"
     },
     "customer_reference_number": {
       "type": ["string", "null"]
@@ -111,13 +111,27 @@
     "corporate_access_number": {
       "type": ["string", "null"]
     },
+
     "legal_entity_name": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "The legal entity that is the subject or declarant of the filing. For Partnership Act trade name registrations, this is the entity registering or owning the trade name (e.g., PTW CANADA LTD.), not the trade name itself."
     },
+
+    "trade_name": {
+      "type": ["string", "null"],
+      "description": "The trade name being registered or searched, if applicable."
+    },
+
+    "partnership_name": {
+      "type": ["string", "null"],
+      "description": "The partnership name being registered or searched, if applicable."
+    },
+
     "act": {
       "type": ["string", "null"],
       "enum": ["business_corporations_act", "partnership_act", "unknown", null]
     },
+
     "event_date": {
       "type": ["string", "null"],
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
@@ -125,6 +139,7 @@
     "event_time": {
       "type": ["string", "null"]
     },
+
     "raw_header_text": {
       "type": ["string", "null"]
     },
@@ -132,10 +147,12 @@
       "type": ["string", "null"]
     }
   },
+
   "required": [
     "source_kind",
     "transaction_type_raw",
     "product_code"
   ],
+
   "additionalProperties": false
 }
