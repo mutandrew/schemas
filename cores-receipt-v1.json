@@ -1,35 +1,147 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/mutandrew/schemas/main/cores-receipt-v1.json"
-  "title": "CORES Corporation / Non-Profit Search Receipt",
+  "$id": "https://raw.githubusercontent.com/mutandrew/schemas/main/cores-receipt-v1.json",
+  "title": "CORES Transaction",
   "type": "object",
-  "description": "Structured data for an Alberta CORES Corporation / Non-Profit Search receipt.",
+  "description": "Structured data extracted from an Alberta Corporate Registry (CORES) output document.",
   "properties": {
-    "government_fee": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Government fee charged for the service, in dollars. Example: 7.15"
-    },
-    "transaction_type": {
+    "source_kind": {
       "type": "string",
-      "description": "Description of the transaction type shown on the receipt.",
+      "description": "What kind of source this JSON was extracted from.",
+      "enum": ["cores_output_pdf"]
+    },
+    "transaction_type_raw": {
+      "type": "string",
+      "description": "The exact transaction type or heading text as it appears on the CORES document."
+    },
+    "product_code": {
+      "type": "string",
+      "description": "Normalized product code corresponding to the CORES transaction.",
       "enum": [
-        "Corporation / Non-Profit Search"
+        "bca_search_certificate_status_current",
+        "bca_search_certificate_status_historical",
+        "bca_search_certified_info_ab_or_extraprov",
+        "bca_search_certified_info_other",
+        "bca_search_certified_microfilm_attachment",
+        "bca_search_certified_transaction_ab_or_extraprov",
+        "bca_search_certified_transaction_other",
+        "bca_search_copy_microfilm_attachment",
+        "bca_search_corp_current_ab_and_extraprov",
+        "bca_search_corp_current_other",
+        "bca_search_corp_historical_ab_and_extraprov",
+        "bca_search_corp_historical_other",
+        "bca_reg_amalgamate_alberta_corp",
+        "bca_reg_change_name_alberta_corp",
+        "bca_reg_change_name_extraprov_corp",
+        "bca_reg_change_name_or_structure_alberta_corp",
+        "bca_reg_complete_revival_alberta_corp",
+        "bca_reg_continue_extraprov_into_alberta",
+        "bca_reg_file_annual_return",
+        "bca_reg_incorporate_alberta_corp",
+        "bca_reg_register_amalgamation_extraprov_corps",
+        "bca_reg_register_english_french_equivalency_or_extraprov_assumed_name",
+        "bca_reg_register_extraprov_corp",
+        "bca_reg_register_extraprov_nonprofit_with_exemption",
+        "bca_reg_reinstate_extraprov_corp",
+        "pa_search_certified_info",
+        "pa_search_certified_microfilm_attachment",
+        "pa_search_certified_transaction",
+        "pa_search_copy_microfilm_attachment",
+        "pa_search_current_trade_name_or_partnership",
+        "pa_search_historical_trade_name_or_partnership",
+        "pa_reg_amend_limited_partnership",
+        "pa_reg_amend_partnership",
+        "pa_reg_register_limited_liability_partnership",
+        "pa_reg_register_limited_partnership",
+        "pa_reg_register_partnership",
+        "pa_reg_register_trade_name",
+        "bca_search_status_inquiry",
+        "bca_reg_change_agent_for_service",
+        "bca_reg_add_change_receiver",
+        "bca_reg_add_update_record_keeper_after_dissolution",
+        "bca_reg_appoint_receiver",
+        "bca_reg_change_status_merged_extraprov_corp",
+        "bca_reg_complete_continuance_alberta_to_other_jurisdiction",
+        "bca_reg_discharge_receiver",
+        "bca_reg_file_bankruptcy_alberta_corp",
+        "bca_reg_file_intent_to_dissolve_alberta_corp",
+        "bca_reg_file_change_attorney_extraprov",
+        "bca_reg_file_change_address_alberta_corp",
+        "bca_reg_file_change_address_attorney_extraprov",
+        "bca_reg_file_change_directors_shareholders",
+        "bca_reg_file_change_head_office_extraprov",
+        "bca_reg_file_plan_of_arrangement_no_amendment",
+        "bca_reg_file_receipt_final_receivership",
+        "bca_reg_file_receipt_interim_receivership",
+        "bca_reg_file_structure_or_jurisdiction_change_extraprov",
+        "bca_reg_initiate_revival_alberta_corp",
+        "bca_reg_issue_certificate_dissolution_alberta_corp",
+        "bca_reg_merge_multiple_extraprov_corps",
+        "bca_reg_request_cancellation_extraprov_corp",
+        "bca_reg_request_continuance_alberta_to_other_jurisdiction",
+        "bca_reg_revoke_cancellation_extraprov_corp",
+        "bca_reg_revoke_intent_to_dissolve_alberta_corp",
+        "bca_reg_service_provider_correct_corporation",
+        "pa_search_status_inquiry",
+        "pa_reg_amend_llp",
+        "pa_reg_cancel_llp",
+        "pa_reg_dissolve_limited_partnership",
+        "pa_reg_dissolve_trade_name_or_partnership",
+        "pa_reg_file_llp_annual_report",
+        "pa_reg_service_provider_correct_trade_name_or_partnership",
+        "pa_reg_update_declarant_or_partner",
+        "unknown"
       ]
     },
+    "service_request_number": {
+      "type": ["string", "null"],
+      "description": "Service Request Number (SRN) from the CORES document, if present.",
+      "pattern": "^[0-9]+$"
+    },
     "customer_reference_number": {
-      "type": "string",
-      "description": "Customer reference number shown on the receipt (e.g., your internal file or matter number).",
-      "minLength": 1,
-      "maxLength": 50,
-      "pattern": "^[0-9A-Za-z-]+$",
-      "examples": ["00602"]
+      "type": ["string", "null"],
+      "description": "Customer reference number from the CORES document, if shown."
+    },
+    "corporate_access_number": {
+      "type": ["string", "null"],
+      "description": "Corporate Access Number (CAN) if present on the document."
+    },
+    "legal_entity_name": {
+      "type": ["string", "null"],
+      "description": "Full legal entity name (corporation, non-profit, trade name, partnership) from the document."
+    },
+    "act": {
+      "type": ["string", "null"],
+      "description": "Which statute applies.",
+      "enum": ["business_corporations_act", "partnership_act", "unknown", null]
+    },
+    "event_date": {
+      "type": ["string", "null"],
+      "description": "The main date associated with the transaction, in ISO format YYYY-MM-DD.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "event_time": {
+      "type": ["string", "null"],
+      "description": "Time of search or filing, if explicitly present (24-hour or 12-hour format as text)."
+    },
+    "government_fee": {
+      "type": ["number", "null"],
+      "description": "Government fee for this product according to the product catalogue, if known.",
+      "minimum": 0
+    },
+    "raw_header_text": {
+      "type": ["string", "null"],
+      "description": "The header / title block text from the top of the first page, as a sanity check."
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "Any extra comments or parsing assumptions."
     }
   },
   "required": [
-    "government_fee",
-    "transaction_type",
-    "customer_reference_number"
+    "source_kind",
+    "transaction_type_raw",
+    "product_code"
   ],
   "additionalProperties": false
 }
